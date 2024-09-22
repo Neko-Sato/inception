@@ -1,7 +1,15 @@
 services:
+  wordpress:
+    build: requirements/wordpress
+    networks:
+      - fast-cgi
   nginx:
     build: requirements/nginx
     ports:
       - "443:443"
-  wordpress:
-    build: requirements/wordpress
+    networks:
+      - fast-cgi
+
+networks:
+  fast-cgi:
+    driver: bridge
