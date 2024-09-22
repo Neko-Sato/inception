@@ -5,11 +5,11 @@ RUN apt update && \
     apt install -y php-fpm && \
     apt install -y curl
 
-WORKDIR /var/www/html
+RUN mkdir -p /var/www/html && \ 
+    chown -R www-data:www-data /var/www/html && \
+    curl -fsOL https://ja.wordpress.org/latest-ja.tar.gz && \
+    tar -zxvf latest-ja.tar.gz && \
+    cp -r wordpress/* /var/www/html && \
+    rm -rf latest-ja.tar.gz wordpress 
 
-RUN curl -fsOL https://ja.wordpress.org/latest-ja.tar.gz && \
-    tar xvf latest-ja.tar.gz && \
-    rm -f latest-ja.tar.gz && \
-    chown -R www-data:www-data .
-
-ENTRYPOINT [ "" ]
+ENTRYPOINT [ "php-fpm8.2", "-F" ]
