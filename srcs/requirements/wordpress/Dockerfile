@@ -2,7 +2,7 @@ FROM debian:latest
 
 RUN apt update && \
     apt upgrade -y && \
-    apt install -y php-fpm && \
+    apt install -y php-fpm php-mysql && \
     apt install -y curl
 
 RUN mkdir -p /var/www/html && \ 
