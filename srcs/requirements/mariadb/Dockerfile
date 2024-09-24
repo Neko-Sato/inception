@@ -4,4 +4,4 @@ RUN apt update && \
     apt upgrade -y && \
     apt install -y mariadb-server
 
-ENTRYPOINT ["mariadbd-safe"]
+ENTRYPOINT ["mariadbd-safe", "--bind-address=0.0.0.0"]

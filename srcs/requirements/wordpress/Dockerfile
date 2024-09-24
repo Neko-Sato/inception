@@ -2,7 +2,7 @@ FROM debian:latest
 
 RUN apt update && \
     apt upgrade -y && \
-    apt install -y php-fpm php-mysql && \
+    apt install -y php-fpm php-mysqlnd && \
     apt install -y curl
 
 RUN mkdir -p /var/www/html && \ 
@@ -12,6 +12,6 @@ RUN mkdir -p /var/www/html && \
     cp -r wordpress/* /var/www/html && \
     rm -rf latest-ja.tar.gz wordpress
 
-RUN sed -i 's/^listen =.*/listen = 9000/g' /etc/php/8.2/fpm/pool.d/www.conf
+COPY ./conf/www.conf /etc/php/8.2/fpm/pool.d/www.conf
 
 ENTRYPOINT [ "php-fpm8.2", "-F" ]
