@@ -3,6 +3,8 @@ services:
     build: requirements/mariadb
     networks:
       - inception
+    volumes:
+      - database:/var/lib/mysql
   wordpress:
     build: requirements/wordpress
     networks:
@@ -24,7 +26,6 @@ services:
 
 networks:
   inception:
-    driver: bridge
 
 volumes:
   database:
