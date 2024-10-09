@@ -10,7 +10,7 @@ services:
     networks:
       - inception
     volumes:
-      - wordpress:/var/www/html
+      - wordpress:/var/www
     depends_on:
       - mariadb
   nginx:
@@ -20,7 +20,7 @@ services:
     networks:
       - inception
     volumes:
-      - wordpress:/var/www/html
+      - wordpress:/var/www
     depends_on:
       - wordpress
 

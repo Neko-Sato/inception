@@ -1,8 +1,10 @@
 FROM debian:latest
 
-# RUN apt update && \
-#     apt install -y mariadb-server
+RUN apt update && \
+    apt install -y mariadb-server
 
-ENTRYPOINT ["bash"]
+RUN rm -rf /var/lib/mysql
 
-# ENTRYPOINT ["mariadbd-safe", "--bind-address=0.0.0.0"]
+COPY ./tools/script.sh /usr/local/bin/script.sh
+
+ENTRYPOINT ["sh", "/usr/local/bin/script.sh"]
