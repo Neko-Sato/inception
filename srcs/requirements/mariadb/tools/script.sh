@@ -1,14 +1,17 @@
 set -e
 
-if [ ! -d /var/lib/mysql ]; then
-    mariadb-install-db --user=mysql
-    mariadb << EOF
-CREATE USER 'wordpress'@'%' IDENTIFIED BY 'wordpress';
-CREATE DATABASE wordpress;
-GRANT ALL PRIVILEGES ON wordpress.* TO 'wordpress'@'%';
-FLUSH PRIVILEGES;
-SELECT 'Hello, World!' AS message;
-EOF
+initialize_database() {
+    mysql_install_db --user=mysql
+    mariadbd-safe &
+    MARIADB_PID=$!
+    sleep 1
+    mariadb < /init.sql
+    kill $MARIADB_PID
+    wait $MARIADB_PID
+}
+
+if [ ! -f /var/lib/mysql ]; then
+  initialize_database
 fi
 
-mariadbd-safe --bind-address=0.0.0.0
+exec mariadbd-safe
