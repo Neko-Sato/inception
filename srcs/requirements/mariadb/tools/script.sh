@@ -10,7 +10,7 @@ initialize_database() {
     wait $MARIADB_PID
 }
 
-if [ ! -f /var/lib/mysql ]; then
+if [ ! -d /var/lib/mysql ]; then
   initialize_database
 fi
 
