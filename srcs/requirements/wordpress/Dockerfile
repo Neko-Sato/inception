@@ -7,6 +7,7 @@ RUN apt update && \
 RUN rm -rf /var/www/html
 
 COPY ./conf/www.conf /etc/php/8.2/fpm/pool.d/www.conf
+COPY ./conf/wp-config.php /wp-config.php
 COPY ./tools/script.sh /usr/local/bin/script.sh
 
 ENTRYPOINT [ "sh", "/usr/local/bin/script.sh" ]
