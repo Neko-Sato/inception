@@ -1,4 +1,4 @@
-CREATE USER 'wordpress'@'%' IDENTIFIED BY 'wordpress';
-CREATE DATABASE wordpress;
-GRANT ALL PRIVILEGES ON wordpress.* TO 'wordpress'@'%';
+CREATE USER '@@@DB_USER@@@'@'%' IDENTIFIED BY '@@@DB_PASSWORD@@@';
+CREATE DATABASE @@@DB_NAME@@@;
+GRANT ALL PRIVILEGES ON @@@DB_NAME@@@.* TO '@@@DB_USER@@@'@'%';
 FLUSH PRIVILEGES;
