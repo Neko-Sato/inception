@@ -6,7 +6,7 @@
 #    By: hshimizu <hshimizu@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/09/21 01:34:16 by hshimizu          #+#    #+#              #
-#    Updated: 2024/09/21 01:42:29 by hshimizu         ###   ########.fr        #
+#    Updated: 2024/10/20 05:15:03 by hshimizu         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,7 +16,7 @@ build:
 	docker compose build
 
 up:
-	docker compose up
+	docker compose up -d
 
 down:
 	docker compose down

@@ -1,20 +1,31 @@
 services:
   mariadb:
     build: requirements/mariadb
+    environment:
+      - DB_NAME=${DB_NAME}
+      - DB_USER=${DB_USER}
+      - DB_PASSWORD=${DB_PASSWORD}
     networks:
       - inception
     volumes:
       - database:/var/lib/mysql
+    restart: always
   wordpress:
     build: requirements/wordpress
+    environment:
+      - DB_NAME=${DB_NAME}
+      - DB_USER=${DB_USER}
+      - DB_PASSWORD=${DB_PASSWORD}
     networks:
       - inception
     volumes:
       - wordpress:/var/www
     depends_on:
       - mariadb
+    restart: always
   nginx:
     build: requirements/nginx
+    hostname: login.42.fr
     ports:
       - "443:443"
     networks:
@@ -23,6 +34,7 @@ services:
       - wordpress:/var/www
     depends_on:
       - wordpress
+    restart: always
 
 networks:
   inception:
