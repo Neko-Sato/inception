@@ -1,23 +1,24 @@
 #!/bin/bash
 set -e
 
-initialize_database() {
-  mariadb-install-db
-  $@ &
-  MARIADB_PID=$! 
-  until mysqladmin ping --silent; do
-    sleep 1
-  done
-  sed -e "s/@@@DB_USER@@@/$DB_USER/g" \
-      -e "s/@@@DB_PASSWORD@@@/$DB_PASSWORD/g" \
-      -e "s/@@@DB_NAME@@@/$DB_NAME/g" \
-      init.sql | mariadb
-  kill $MARIADB_PID
-  wait $MARIADB_PID
-}
+"$@" --bind-address=localhost &
+MARIADB_PID=$! 
+until mysqladmin ping --silent; do
+  sleep 1
+done
 
-if [ ! -d /var/lib/mysql/mysql ]; then
-  initialize_database $@
-fi
+mariadb <<EOF
+ALTER USER 'root'@'localhost' IDENTIFIED BY '$DB_ROOT_PASSWORD';
+DROP USER IF EXISTS ''@'localhost';
+DROP USER IF EXISTS ''@'%';
+DROP USER IF EXISTS 'root'@'%';
+DROP DATABASE IF EXISTS test;
+CREATE DATABASE IF NOT EXISTS $DB_NAME;
+CREATE USER IF NOT EXISTS '$DB_USER'@'%' IDENTIFIED BY '$DB_PASSWORD';
+GRANT ALL PRIVILEGES ON $DB_NAME.* TO '$DB_USER'@'%';
+FLUSH PRIVILEGES;
+EOF
+kill $MARIADB_PID
+wait $MARIADB_PID
 
 exec "$@"

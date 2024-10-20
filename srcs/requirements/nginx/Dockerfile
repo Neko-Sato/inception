@@ -7,6 +7,7 @@ RUN apt update && \
 RUN rm -rf /var/www/html
 
 COPY ./conf/nginx.conf /etc/nginx/nginx.conf
-COPY ./tools/script.sh /usr/local/bin/script.sh
 
-ENTRYPOINT ["sh", "/usr/local/bin/script.sh"]
+COPY ./tools/script.sh script.sh
+
+ENTRYPOINT ["sh", "script.sh"]

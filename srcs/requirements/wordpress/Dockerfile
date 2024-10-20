@@ -4,10 +4,18 @@ RUN apt update && \
     apt install -y php-fpm php-mysqlnd && \
     apt install -y curl
 
-RUN rm -rf /var/www/html
+RUN curl -o wordpress.tar.gz -fL https://ja.wordpress.org/latest-ja.tar.gz && \
+    mkdir -p /var/www/ && \
+    tar -xzf wordpress.tar.gz -C /var/www/ && \
+    rm -f wordpress.tar.gz && \
+    chown -R www-data:www-data /var/www/wordpress
 
 COPY ./conf/www.conf /etc/php/8.2/fpm/pool.d/www.conf
-COPY ./conf/wp-config.php /wp-config.php
-COPY ./tools/script.sh /usr/local/bin/script.sh
+COPY ./conf/wp-config.php /var/www/wordpress/wp-config.php
+COPY ./tools/init.php /init.php
 
-ENTRYPOINT [ "sh", "/usr/local/bin/script.sh" ]
+COPY ./tools/docker-entrypoint.sh /usr/local/bin/
+RUN chmod +x /usr/local/bin/docker-entrypoint.sh
+
+ENTRYPOINT ["docker-entrypoint.sh"]
+CMD ["php-fpm8.2", "-F"]

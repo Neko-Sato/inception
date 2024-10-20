@@ -2,9 +2,9 @@ services:
   mariadb:
     build: requirements/mariadb
     environment:
-      - DB_NAME=${DB_NAME}
-      - DB_USER=${DB_USER}
-      - DB_PASSWORD=${DB_PASSWORD}
+      - DB_NAME
+      - DB_USER
+      - DB_PASSWORD
     networks:
       - inception
     volumes:
@@ -13,9 +13,16 @@ services:
   wordpress:
     build: requirements/wordpress
     environment:
-      - DB_NAME=${DB_NAME}
-      - DB_USER=${DB_USER}
-      - DB_PASSWORD=${DB_PASSWORD}
+      - DB_NAME
+      - DB_USER
+      - DB_PASSWORD
+      - WP_BLOG_TITLE
+      - WP_USER1_NAME
+      - WP_USER1_EMAIL
+      - WP_USER1_PASSWORD
+      - WP_USER2_NAME
+      - WP_USER2_EMAIL
+      - WP_USER2_PASSWORD
     networks:
       - inception
     volumes:
