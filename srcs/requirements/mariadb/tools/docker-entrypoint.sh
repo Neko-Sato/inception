@@ -1,7 +1,7 @@
 #!/bin/bash
 set -e
 
-"$@" --bind-address=localhost &
+"$@" --skip-networking &
 MARIADB_PID=$! 
 until mysqladmin ping --silent; do
   sleep 1

@@ -1,6 +1,5 @@
 #!/bin/bash
 set -e
 
-php /init.php > /dev/null
-
-exec "$@"
+wp_setup.php
+exec "$@" -F

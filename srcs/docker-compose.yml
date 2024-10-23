@@ -1,5 +1,6 @@
 services:
   mariadb:
+    container_name: mariadb
     build: requirements/mariadb
     environment:
       - DB_NAME
@@ -10,7 +11,13 @@ services:
     volumes:
       - database:/var/lib/mysql
     restart: always
+    healthcheck:
+      test: ["CMD", "healthcheck.sh"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
   wordpress:
+    container_name: wordpress
     build: requirements/wordpress
     environment:
       - DB_NAME
@@ -28,11 +35,17 @@ services:
     volumes:
       - wordpress:/var/www
     depends_on:
-      - mariadb
+      mariadb:
+        condition: service_healthy
     restart: always
+    healthcheck:
+      test: ["CMD", "healthcheck.sh"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
   nginx:
+    container_name: nginx
     build: requirements/nginx
-    hostname: login.42.fr
     ports:
       - "443:443"
     networks:
@@ -40,8 +53,14 @@ services:
     volumes:
       - wordpress:/var/www
     depends_on:
-      - wordpress
+      wordpress:
+        condition: service_healthy
     restart: always
+    healthcheck:
+      test: ["CMD", "healthcheck.sh"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
 
 networks:
   inception:
