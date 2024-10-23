@@ -2,4 +2,4 @@
 set -e
 
 PORT=3306
-ss -tuln sport = :$PORT | grep -q 'LISTEN'
+ss -tuln sport = :$PORT | grep -q 'LISTEN' || exit 1

@@ -13,9 +13,6 @@ services:
     restart: always
     healthcheck:
       test: ["CMD", "healthcheck.sh"]
-      interval: 10s
-      timeout: 5s
-      retries: 5
   wordpress:
     container_name: wordpress
     build: requirements/wordpress
@@ -40,9 +37,6 @@ services:
     restart: always
     healthcheck:
       test: ["CMD", "healthcheck.sh"]
-      interval: 10s
-      timeout: 5s
-      retries: 5
   nginx:
     container_name: nginx
     build: requirements/nginx
@@ -58,13 +52,20 @@ services:
     restart: always
     healthcheck:
       test: ["CMD", "healthcheck.sh"]
-      interval: 10s
-      timeout: 5s
-      retries: 5
 
 networks:
   inception:
 
 volumes:
   database:
+    driver: local
+    driver_opts:
+      type: none
+      device: ${HOME}/data/database
+      o: bind
   wordpress:
+    driver: local
+    driver_opts:
+      type: none
+      device: ${HOME}/data/wordpress
+      o: bind
