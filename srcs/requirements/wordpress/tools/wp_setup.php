@@ -5,7 +5,7 @@ $_SERVER['HTTP_HOST'] = 'localhost';
 $_SERVER['SCRIPT_FILENAME'] = basename(__FILE__);
 
 define( 'WP_INSTALLING', true );
-require_once '/var/www/wordpress/wp-load.php';
+require_once '/var/www/wordpress/wp-config.php';
 require_once ABSPATH . 'wp-admin/includes/upgrade.php'; 
 
 function maybe_create_user( $name, $email, $password, $role ) {
