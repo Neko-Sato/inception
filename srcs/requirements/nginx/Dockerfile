@@ -3,7 +3,7 @@ FROM debian:latest
 RUN apt update && \
     apt install -y nginx && \
     apt install -y openssl && \
-    apt install -y netcat-openbsd
+    apt install -y iproute2
 
 COPY ./conf/nginx.conf /etc/nginx/nginx.conf
 

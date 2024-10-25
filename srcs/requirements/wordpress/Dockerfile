@@ -3,7 +3,7 @@ FROM debian:latest
 RUN apt update && \
     apt install -y php-fpm php-mysqlnd && \
     apt install -y curl  && \
-    apt install -y netcat-openbsd
+    apt install -y iproute2
 
 RUN curl -o wordpress.tar.gz -fL https://ja.wordpress.org/latest-ja.tar.gz && \
     mkdir -p /var/www/ && \
