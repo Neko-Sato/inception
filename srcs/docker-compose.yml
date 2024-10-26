@@ -12,6 +12,9 @@ services:
       - database:/var/lib/mysql
     healthcheck:
       test: ["CMD", "healthcheck.sh"]
+      start_period: 5s
+      timeout: 20s
+      retries: 10
     restart: always
   wordpress:
     container_name: wordpress
@@ -36,6 +39,9 @@ services:
         condition: service_healthy
     healthcheck:
       test: ["CMD", "healthcheck.sh"]
+      start_period: 5s
+      timeout: 20s
+      retries: 10
     restart: always
   nginx:
     container_name: nginx
@@ -51,6 +57,9 @@ services:
         condition: service_healthy
     healthcheck:
       test: ["CMD", "healthcheck.sh"]
+      start_period: 5s
+      timeout: 20s
+      retries: 10
 
 networks:
   inception:
@@ -58,13 +67,13 @@ networks:
 volumes:
   database:
     driver: local
-    driver_opts:
-      type: none
-      device: ${HOME}/data/database
-      o: bind
+    # driver_opts:
+    #   type: none
+    #   device: ${HOME}/data/database
+    #   o: bind
   wordpress:
     driver: local
-    driver_opts:
-      type: none
-      device: ${HOME}/data/wordpress
-      o: bind
+    # driver_opts:
+    #   type: none
+    #   device: ${HOME}/data/wordpress
+    #   o: bind
