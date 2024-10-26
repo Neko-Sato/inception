@@ -52,6 +52,8 @@ services:
     build:
       context: ./requirements/nginx
       network: host
+    environment:
+      - DOMAIN_NAME
     ports:
       - "443:443"
     networks:
