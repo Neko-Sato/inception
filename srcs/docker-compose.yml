@@ -1,7 +1,9 @@
 services:
   mariadb:
     container_name: mariadb
-    build: ./requirements/mariadb
+    build: 
+      context: ./requirements/mariadb
+      network: host
     environment:
       - DB_NAME
       - DB_USER
@@ -18,7 +20,9 @@ services:
     restart: always
   wordpress:
     container_name: wordpress
-    build: ./requirements/wordpress
+    build:
+      context: ./requirements/wordpress
+      network: host
     environment:
       - DB_NAME
       - DB_USER
@@ -45,7 +49,9 @@ services:
     restart: always
   nginx:
     container_name: nginx
-    build: requirements/nginx
+    build:
+      context: ./requirements/nginx
+      network: host
     ports:
       - "443:443"
     networks:
