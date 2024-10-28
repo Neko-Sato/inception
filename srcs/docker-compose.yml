@@ -1,4 +1,5 @@
 services:
+  #
   mariadb:
     container_name: mariadb
     build: 
@@ -18,6 +19,7 @@ services:
       timeout: 20s
       retries: 10
     restart: always
+  #
   wordpress:
     container_name: wordpress
     build:
@@ -41,12 +43,15 @@ services:
     depends_on:
       mariadb:
         condition: service_healthy
+      redis:
+        condition: service_healthy
     healthcheck:
       test: ["CMD", "healthcheck.sh"]
       start_period: 5s
       timeout: 20s
       retries: 10
     restart: always
+  #
   nginx:
     container_name: nginx
     build:
@@ -56,6 +61,41 @@ services:
       - DOMAIN_NAME
     ports:
       - "443:443"
+    networks:
+      - inception
+    volumes:
+      - wordpress:/var/www
+    depends_on:
+      wordpress:
+        condition: service_healthy
+    healthcheck:
+      test: ["CMD", "healthcheck.sh"]
+      start_period: 5s
+      timeout: 20s
+      retries: 10
+  #
+  redis:
+    container_name: redis
+    build:
+      context: ./requirements/bonus/redis
+      network: host
+    networks:
+      - inception
+    healthcheck:
+      test: ["CMD", "healthcheck.sh"]
+      start_period: 5s
+      timeout: 20s
+      retries: 10
+  #
+  vsftpd:
+    container_name: vsftpd
+    build:
+      context: ./requirements/bonus/vsftpd
+      network: host
+    ports:
+      - "20:20"
+      - "21:21"
+      - "60000-60100:60000-60100"
     networks:
       - inception
     volumes:
