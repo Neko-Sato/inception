@@ -9,7 +9,7 @@ RUN chown www-data:www-data /usr/local/bin/wp && \
 	chmod +x /usr/local/bin/wp
 
 RUN mkdir -p /var/www/wordpress && \
-	chown www-data:www-data /var/www/wordpress && \
+	chown -R www-data:www-data /var/www/wordpress && \
 	gosu www-data wp core download --locale=ja --path=/var/www/wordpress
 
 COPY ./conf/wp-config.php /var/www/wordpress/wp-config.php

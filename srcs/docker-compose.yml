@@ -90,30 +90,30 @@ services:
       timeout: 20s
       retries: 10
   #
-  # vsftpd:
-  #   container_name: vsftpd
-  #   build:
-  #     context: ./requirements/bonus/vsftpd
-  #     network: host
-  #   environment:
-  #     - FTP_USER
-  #     - FTP_PASSWORD
-  #   ports:
-  #     - "20:20"
-  #     - "21:21"
-  #     - "60000-60100:60000-60100"
-  #   networks:
-  #     - inception
-  #   volumes:
-  #     - wordpress:/var/www
-  #   depends_on:
-  #     wordpress:
-  #       condition: service_started
-  #   healthcheck:
-  #     test: ["CMD", "healthcheck.sh"]
-  #     start_period: 5s
-  #     timeout: 20s
-  #     retries: 10
+  vsftpd:
+    container_name: vsftpd
+    build:
+      context: ./requirements/bonus/vsftpd
+      network: host
+    environment:
+      - FTP_USER
+      - FTP_PASSWORD
+    ports:
+      - "20:20"
+      - "21:21"
+      - "60000-60100:60000-60100"
+    networks:
+      - inception
+    volumes:
+      - wordpress:/var/www
+    depends_on:
+      wordpress:
+        condition: service_started
+    healthcheck:
+      test: ["CMD", "healthcheck.sh"]
+      start_period: 5s
+      timeout: 20s
+      retries: 10
   #
   adminer:
     container_name: adminer
@@ -134,15 +134,19 @@ services:
 
 networks:
   inception:
+    name: inception
+    driver: bridge
 
 volumes:
   database:
+    name: database
     driver: local
     # driver_opts:
     #   type: none
     #   device: ${HOME}/data/database
     #   o: bind
   wordpress:
+    name: wordpress
     driver: local
     # driver_opts:
     #   type: none

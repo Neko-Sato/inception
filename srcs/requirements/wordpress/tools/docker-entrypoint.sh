@@ -17,7 +17,7 @@ if ! wp_exec core is-installed; then
     --admin_email="$WP_USER1_EMAIL"
 fi
 
-if ! wp_exec user get "$WP_USER2_NAME" --field=ID > /dev/null 2>&1; then
+if ! wp_exec user get "$WP_USER2_NAME" --field=ID &> /dev/null; then
   wp_exec user create \
     "$WP_USER2_NAME" \
     "$WP_USER2_EMAIL" \
