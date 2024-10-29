@@ -1,11 +1,9 @@
 #!/bin/bash
 set -e
 
-WP_PATH="/var/www/wordpress"
-
 wp_exec () {
   (
-    cd /var/www/wordpress
+    cd "/var/www/wordpress"
     wp --allow-root $@
   )
 }

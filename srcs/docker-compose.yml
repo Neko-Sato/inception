@@ -29,6 +29,7 @@ services:
       - DB_NAME
       - DB_USER
       - DB_PASSWORD
+      - DOMAIN_NAME
       - WP_BLOG_TITLE
       - WP_USER1_NAME
       - WP_USER1_EMAIL
@@ -39,11 +40,9 @@ services:
     networks:
       - inception
     volumes:
-      - wordpress:/var/www
+      - wordpress:/var/www/wordpress
     depends_on:
       mariadb:
-        condition: service_healthy
-      redis:
         condition: service_healthy
     healthcheck:
       test: ["CMD", "healthcheck.sh"]
@@ -64,7 +63,7 @@ services:
     networks:
       - inception
     volumes:
-      - wordpress:/var/www
+      - wordpress:/var/www/wordpress
     depends_on:
       wordpress:
         condition: service_healthy
@@ -74,40 +73,43 @@ services:
       timeout: 20s
       retries: 10
   #
-  redis:
-    container_name: redis
-    build:
-      context: ./requirements/bonus/redis
-      network: host
-    networks:
-      - inception
-    healthcheck:
-      test: ["CMD", "healthcheck.sh"]
-      start_period: 5s
-      timeout: 20s
-      retries: 10
+  # redis:
+  #   container_name: redis
+  #   build:
+  #     context: ./requirements/bonus/redis
+  #     network: host
+  #   networks:
+  #     - inception
+  #   healthcheck:
+  #     test: ["CMD", "healthcheck.sh"]
+  #     start_period: 5s
+  #     timeout: 20s
+  #     retries: 10
   #
-  vsftpd:
-    container_name: vsftpd
-    build:
-      context: ./requirements/bonus/vsftpd
-      network: host
-    ports:
-      - "20:20"
-      - "21:21"
-      - "60000-60100:60000-60100"
-    networks:
-      - inception
-    volumes:
-      - wordpress:/var/www
-    depends_on:
-      wordpress:
-        condition: service_healthy
-    healthcheck:
-      test: ["CMD", "healthcheck.sh"]
-      start_period: 5s
-      timeout: 20s
-      retries: 10
+  # vsftpd:
+  #   container_name: vsftpd
+  #   build:
+  #     context: ./requirements/bonus/vsftpd
+  #     network: host
+  #   environment:
+  #     - FTP_USER
+  #     - FTP_PASSWORD
+  #   ports:
+  #     - "20:20"
+  #     - "21:21"
+  #     - "60000-60100:60000-60100"
+  #   networks:
+  #     - inception
+  #   volumes:
+  #     - wordpress:/var/www
+  #   depends_on:
+  #     wordpress:
+  #       condition: service_started
+  #   healthcheck:
+  #     test: ["CMD", "healthcheck.sh"]
+  #     start_period: 5s
+  #     timeout: 20s
+  #     retries: 10
 
 networks:
   inception:

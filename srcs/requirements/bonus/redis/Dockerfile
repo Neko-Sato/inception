@@ -1,7 +1,7 @@
 FROM debian:latest
 
 RUN apt update && \
-    apt install redis-server && \
+    apt install -y redis-server && \
     apt install -y iproute2
 
 COPY ./conf/redis.conf /etc/redis/redis.conf
