@@ -25,4 +25,14 @@ if ! wp_exec user get "$WP_USER2_NAME" --field=ID > /dev/null 2>&1; then
     --role=subscriber
 fi
 
+if ! wp_exec plugin is-installed redis-cache; then
+  wp_exec plugin install redis-cache
+fi
+
+if ! wp_exec plugin is-active redis-cache; then
+  wp_exec plugin activate redis-cache
+fi
+
+wp_exec redis enable
+
 exec "$@" -F

@@ -8,11 +8,11 @@ ADD https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar /u
 RUN chmod +x /usr/local/bin/wp
 
 RUN mkdir -p /var/www/wordpress && \
-	wp core download --allow-root --locale=ja --path=/var/www/wordpress && \
+	wp core download --locale=ja --allow-root --path=/var/www/wordpress && \
 	chown -R www-data:www-data /var/www/wordpress
 
-COPY ./conf/www.conf /etc/php/8.2/fpm/pool.d/www.conf
 COPY ./conf/wp-config.php /var/www/wordpress/wp-config.php
+COPY ./conf/www.conf /etc/php/8.2/fpm/pool.d/www.conf
 
 COPY ./tools/ /usr/local/bin/
 RUN chmod +x /usr/local/bin/healthcheck.sh
