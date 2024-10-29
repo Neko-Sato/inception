@@ -11,4 +11,4 @@ RUN chmod +x /usr/local/bin/healthcheck.sh
 RUN chmod +x /usr/local/bin/docker-entrypoint.sh
 
 ENTRYPOINT ["docker-entrypoint.sh"]
-CMD ["redis-server"]
+CMD ["redis-server", "/etc/redis/redis.conf"]
