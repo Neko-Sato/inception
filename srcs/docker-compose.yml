@@ -69,6 +69,8 @@ services:
     depends_on:
       wordpress:
         condition: service_healthy
+      adminer:
+        condition: service_healthy
     healthcheck:
       test: ["CMD", "healthcheck.sh"]
       start_period: 5s
@@ -112,6 +114,23 @@ services:
   #     start_period: 5s
   #     timeout: 20s
   #     retries: 10
+  #
+  adminer:
+    container_name: adminer
+    build:
+      context: ./requirements/bonus/adminer
+      network: host
+    networks:
+      - inception
+    depends_on:
+      mariadb:
+        condition: service_healthy
+    healthcheck:
+      test: ["CMD", "healthcheck.sh"]
+      start_period: 5s
+      timeout: 20s
+      retries: 10
+    restart: always
 
 networks:
   inception:

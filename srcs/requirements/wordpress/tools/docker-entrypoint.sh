@@ -4,7 +4,7 @@ set -e
 wp_exec () {
   (
     cd "/var/www/wordpress"
-    wp --allow-root $@
+    gosu www-data wp $@
   )
 }
 
