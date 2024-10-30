@@ -1,7 +1,9 @@
 #!/bin/bash
 set -e
 
-useradd $FTP_USER -d /
-echo "$FTP_USER:$FTP_PASSWORD" | chpasswd
+if ! id $FTP_USER &>/dev/null; then
+    useradd $FTP_USER -d /
+    echo "$FTP_USER:$FTP_PASSWORD" | chpasswd
+fi
 
 exec "$@"
