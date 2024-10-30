@@ -6,7 +6,8 @@ RUN apt update && \
 
 RUN mkdir -p /var/www/adminer
 ADD https://www.adminer.org/latest.php /var/www/adminer/adminer.php
-RUN chown -R www-data:www-data /var/www/adminer
+
+RUN chown -R www-data:www-data /var/www
 
 COPY ./conf/www.conf /etc/php/8.2/fpm/pool.d/www.conf
 
