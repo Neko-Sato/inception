@@ -105,7 +105,7 @@ services:
     networks:
       - inception
     volumes:
-      - wordpress:/var/www
+      - wordpress:/var/www/wordpress
     depends_on:
       wordpress:
         condition: service_started
