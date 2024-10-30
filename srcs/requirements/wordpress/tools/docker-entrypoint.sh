@@ -35,4 +35,4 @@ fi
 
 wp_exec redis enable
 
-exec "$@" -F
+exec "$@"

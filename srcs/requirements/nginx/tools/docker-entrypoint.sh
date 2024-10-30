@@ -14,4 +14,4 @@ openssl req -x509 \
     -days 365 \
     -subj "/C=JP/ST=Tokyo/L=Shinjuku/O=42Tokyo/CN=localhost"
 
-exec "$@" -g "daemon off;"
+exec "$@"

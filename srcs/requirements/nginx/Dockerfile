@@ -12,4 +12,4 @@ RUN chmod +x /usr/local/bin/healthcheck.sh
 RUN chmod +x /usr/local/bin/docker-entrypoint.sh
 
 ENTRYPOINT ["docker-entrypoint.sh"]
-CMD ["nginx"]
+CMD ["nginx", "-g", "daemon off;"]
