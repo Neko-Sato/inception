@@ -76,6 +76,7 @@ services:
       start_period: 5s
       timeout: 20s
       retries: 10
+    restart: always
   #
   redis:
     container_name: redis
@@ -89,6 +90,7 @@ services:
       start_period: 5s
       timeout: 20s
       retries: 10
+    restart: always
   #
   vsftpd:
     container_name: vsftpd
@@ -114,6 +116,7 @@ services:
       start_period: 5s
       timeout: 20s
       retries: 10
+    restart: always
   #
   website:
     container_name: website
@@ -131,6 +134,7 @@ services:
       start_period: 5s
       timeout: 20s
       retries: 10
+    restart: always
   #
   adminer:
     container_name: adminer

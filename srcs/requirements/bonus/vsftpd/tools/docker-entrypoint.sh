@@ -1,7 +1,7 @@
 #!/bin/bash
-set -ex
+set -e
 
-useradd $FTP_USER
+useradd $FTP_USER -d /
 echo "$FTP_USER:$FTP_PASSWORD" | chpasswd
 
 exec "$@"
