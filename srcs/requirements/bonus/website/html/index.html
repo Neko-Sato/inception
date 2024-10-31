@@ -3,19 +3,15 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>プロフィール情報表示</title>
+    <title>クリックカウントゲーム</title>
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <div class="container">
-        <h1>プロフィール情報を表示</h1>
-        <form id="userForm">
-            <label for="login">login名を入力:</label>
-            <input type="text" id="login" required>
-            <button type="submit">送信</button>
-        </form>
-        <div id="profileInfo" class="profile-info"></div>
+    <div id="container">
+        <img id="movableImage" src="image.png" alt="Click me!" />
     </div>
+    <div id="count">クリック回数: <span id="clickCount">0</span></div>
+
     <script src="script.js"></script>
 </body>
 </html>

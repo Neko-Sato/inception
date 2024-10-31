@@ -1,23 +1,21 @@
 body {
-    font-family: Arial, sans-serif;
-    background-color: #f4f4f4;
-    color: #333;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
     margin: 0;
-    padding: 20px;
 }
 
-.container {
-    max-width: 600px;
-    margin: auto;
-    background: white;
-    padding: 20px;
-    border-radius: 5px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+#container {
+    position: relative;
+    width: 100%;
+    height: 100%;
 }
 
-.profile-image {
-    width: 150px;
-    height: 150px;
-    object-fit: cover;
-    border-radius: 5px;
+#movableImage {
+    position: absolute;
+    width: 100px;
+    height: auto;
+    cursor: pointer;
 }
