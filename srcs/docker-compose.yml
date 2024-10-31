@@ -62,6 +62,7 @@ services:
       - DOMAIN_NAME
     ports:
       - "443:443"
+      - "80:80"
     networks:
       - inception
     volumes:
@@ -125,8 +126,6 @@ services:
       network: host
     environment:
       - DOMAIN_NAME
-    ports:
-      - "80:80"
     networks:
       - inception
     healthcheck:
