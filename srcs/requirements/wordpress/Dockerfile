@@ -4,6 +4,9 @@ RUN apt update && \
     apt install -y php-fpm php-mysqlnd ca-certificates gosu && \
     apt install -y iproute2
 
+RUN mkdir -p /run/php/ && \
+	chown -R www-data:www-data /run/php/
+
 ADD https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar /usr/local/bin/wp
 RUN chmod 755 /usr/local/bin/wp
 

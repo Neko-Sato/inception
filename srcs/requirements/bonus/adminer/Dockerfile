@@ -4,6 +4,9 @@ RUN apt update && \
     apt install -y php-fpm php-mysqlnd && \
     apt install -y iproute2
 
+RUN mkdir -p /run/php/ && \
+	chown -R www-data:www-data /run/php/
+
 RUN mkdir -p /var/www/adminer
 ADD https://www.adminer.org/latest.php /var/www/adminer/adminer.php
 
