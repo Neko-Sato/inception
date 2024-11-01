@@ -179,21 +179,21 @@ volumes:
   database:
     name: database
     driver: local
-    # driver_opts:
-    #   type: none
-    #   device: ${HOME}/data/database
-    #   o: bind
+    driver_opts:
+      type: none
+      device: ${HOME}/data/database
+      o: bind
   wordpress:
     name: wordpress
     driver: local
-    # driver_opts:
-    #   type: none
-    #   device: ${HOME}/data/wordpress
-    #   o: bind
+    driver_opts:
+      type: none
+      device: ${HOME}/data/wordpress
+      o: bind
   share:
     name: share
     driver: local
-    # driver_opts:
-    #   type: none
-    #   device: ${HOME}/data/wordpress
-    #   o: bind
+    driver_opts:
+      type: none
+      device: ${HOME}/data/share
+      o: bind
