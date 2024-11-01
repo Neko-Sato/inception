@@ -3,15 +3,15 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: hshimizu <hshimizustudent.42.fr>          +#+  +:+       +#+         #
+#    By: hshimizu <hshimizu@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2024/09/21 01:34:16 by hshimizu          #+#    #+#              #
-#    Updated: 2024/10/27 04:29:38 by hshimizu         ###   ########.fr        #
+#    Created: 2024/11/02 06:20:15 by hshimizu          #+#    #+#              #
+#    Updated: 2024/11/02 06:20:18 by hshimizu         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 COMPOSE_FILE	:= ./srcs/docker-compose.yml
-VOLUME_DIR			:= ~/data
+VOLUME_DIR		:= ~/data
 
 .PHONY: build up down restart logs ps clean re neko mount umount
 
