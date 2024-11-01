@@ -9,7 +9,7 @@ ADD https://www.adminer.org/latest.php /var/www/adminer/adminer.php
 
 RUN chown -R www-data:www-data /var/www
 
-COPY ./conf/www.conf /etc/php/8.2/fpm/pool.d/www.conf
+COPY ./conf/www.conf /etc/php/7.4/fpm/pool.d/www.conf
 
 COPY ./tools/ /usr/local/bin/
 RUN chmod +x /usr/local/bin/healthcheck.sh
