@@ -161,6 +161,8 @@ services:
       - "445:445"
     networks:
       - inception
+    volumes:
+      - share:/share
     healthcheck:
       test: ["CMD", "healthcheck.sh"]
       start_period: 5s
@@ -183,6 +185,13 @@ volumes:
     #   o: bind
   wordpress:
     name: wordpress
+    driver: local
+    # driver_opts:
+    #   type: none
+    #   device: ${HOME}/data/wordpress
+    #   o: bind
+  share:
+    name: share
     driver: local
     # driver_opts:
     #   type: none
