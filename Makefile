@@ -48,7 +48,7 @@ clean:
 
 mount:
 	@mkdir -p ~/share
-	@mount -t cifs //hshimizu.42.fr/share ~/share -o guest,uid=$(id -u),gid=$(id -g)
+	@sudo mount -t cifs //hshimizu.42.fr/share ~/share -o guest,uid=$(id -u),gid=$(id -g)
 
 umount:
 	@umount ~/share
