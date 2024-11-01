@@ -151,6 +151,22 @@ services:
       timeout: 20s
       retries: 10
     restart: always
+  #
+  samba:
+    container_name: samba
+    build:
+      context: ./requirements/bonus/samba
+      network: host
+    ports:
+      - "445:445"
+    networks:
+      - inception
+    healthcheck:
+      test: ["CMD", "healthcheck.sh"]
+      start_period: 5s
+      timeout: 20s
+      retries: 10
+    restart: always
 
 networks:
   inception:

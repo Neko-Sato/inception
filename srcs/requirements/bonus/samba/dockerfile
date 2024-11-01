@@ -1,0 +1,16 @@
+FROM debian:latest
+
+RUN apt update && \
+    apt install -y samba && \
+    apt install -y iproute2
+
+RUN mkdir -p /share
+
+COPY ./conf/smb.conf /etc/samba/smb.conf
+
+COPY ./tools/ /usr/local/bin/
+RUN chmod +x /usr/local/bin/healthcheck.sh
+RUN chmod +x /usr/local/bin/docker-entrypoint.sh
+
+ENTRYPOINT ["docker-entrypoint.sh"]
+CMD ["smbd", "-i", "-F"]
