@@ -4,7 +4,9 @@ RUN apt update && \
     apt install -y samba && \
     apt install -y iproute2
 
-RUN mkdir -p /share
+RUN mkdir -p /share && \
+    chown -R nobody:nogroup /share && \
+    chmod -R 0777 /share
 
 COPY ./conf/smb.conf /etc/samba/smb.conf
 

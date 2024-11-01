@@ -124,8 +124,6 @@ services:
     build:
       context: ./requirements/bonus/website
       network: host
-    environment:
-      - DOMAIN_NAME
     networks:
       - inception
     healthcheck:
