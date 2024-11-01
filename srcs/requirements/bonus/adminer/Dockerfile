@@ -16,4 +16,4 @@ RUN chmod +x /usr/local/bin/healthcheck.sh
 RUN chmod +x /usr/local/bin/docker-entrypoint.sh
 
 ENTRYPOINT ["docker-entrypoint.sh"]
-CMD ["php-fpm8.2"]
+CMD ["php-fpm7.4"]
