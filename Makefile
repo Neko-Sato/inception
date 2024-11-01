@@ -11,8 +11,9 @@
 # **************************************************************************** #
 
 COMPOSE_FILE	:= ./srcs/docker-compose.yml
+volume			:= ~/data/database ~/data/wordpress ~/data/share
 
-.PHONY: build up down restart logs ps clean re neko
+.PHONY: build up down restart logs ps clean re neko mount umount
 
 build: $(COMPOSE_FILE)
 	@docker compose -f $< build
@@ -33,18 +34,34 @@ ps: $(COMPOSE_FILE)
 	@docker compose -f $< ps
 
 clean:
-	echo docker stop...
-	docker stop $(docker ps -qa) 2>/dev/null || true
-	echo docker rm...
-	docker rm $(docker ps -qa) 2>/dev/null || true
-	echo docker rmi...
-	docker rmi -f $(docker images -qa) 2>/dev/null || true
-	echo docker volume rm...
-	docker volume rm $(docker volume ls -q) 2>/dev/null || true
-	echo docker network rm...
-	docker network rm $(docker network ls -q) 2>/dev/null || true
+	@echo docker stop...
+	@docker stop $(docker ps -qa) 2>/dev/null || true
+	@echo docker rm...
+	@docker rm $(docker ps -qa) 2>/dev/null || true
+	@echo docker rmi...
+	@docker rmi -f $(docker images -qa) 2>/dev/null || true
+	@echo docker volume rm...
+	@docker volume rm $(docker volume ls -q) 2>/dev/null || true
+	@echo docker network rm...
+	@docker network rm $(docker network ls -q) 2>/dev/null || true
+
+mount:
+	@mkdir -p ~/share
+	@mount -t cifs //hshimizu.42.fr/share ~/share -o guest,uid=$(id -u),gid=$(id -g)
+
+umount:
+	@umount ~/share
 
 re: down clean build up
 
 neko:
 	@echo "🐈 ﾆｬｰﾝ"
+
+~/data/database:
+	@mkdir -p ~/data/database
+
+~/data/wordpress:
+	@mkdir -p ~/data/wordpress
+
+~/data/share:
+	@mkdir -p ~/data/share
