@@ -1,10 +1,9 @@
 services:
-  #
   mariadb:
     container_name: mariadb
     build: 
       context: ./requirements/mariadb
-      network: host
+      # network: host
     environment:
       - DB_NAME
       - DB_USER
@@ -19,12 +18,11 @@ services:
       timeout: 20s
       retries: 10
     restart: always
-  #
   wordpress:
     container_name: wordpress
     build:
       context: ./requirements/wordpress
-      network: host
+      # network: host
     environment:
       - DB_NAME
       - DB_USER
@@ -52,12 +50,11 @@ services:
       timeout: 20s
       retries: 10
     restart: always
-  #
   nginx:
     container_name: nginx
     build:
       context: ./requirements/nginx
-      network: host
+      # network: host
     environment:
       - DOMAIN_NAME
     ports:
@@ -77,12 +74,11 @@ services:
       timeout: 20s
       retries: 10
     restart: always
-  #
   redis:
     container_name: redis
     build:
       context: ./requirements/bonus/redis
-      network: host
+      # network: host
     networks:
       - inception
     healthcheck:
@@ -91,12 +87,11 @@ services:
       timeout: 20s
       retries: 10
     restart: always
-  #
   vsftpd:
     container_name: vsftpd
     build:
       context: ./requirements/bonus/vsftpd
-      network: host
+      # network: host
     environment:
       - FTP_USER
       - FTP_PASSWORD
@@ -117,12 +112,11 @@ services:
       timeout: 20s
       retries: 10
     restart: always
-  #
   website:
     container_name: website
     build:
       context: ./requirements/bonus/website
-      network: host
+      # network: host
     networks:
       - inception
     healthcheck:
@@ -131,12 +125,11 @@ services:
       timeout: 20s
       retries: 10
     restart: always
-  #
   adminer:
     container_name: adminer
     build:
       context: ./requirements/bonus/adminer
-      network: host
+      # network: host
     networks:
       - inception
     depends_on:
@@ -148,12 +141,11 @@ services:
       timeout: 20s
       retries: 10
     restart: always
-  #
   samba:
     container_name: samba
     build:
       context: ./requirements/bonus/samba
-      network: host
+      # network: host
     ports:
       - "445:445"
     networks:
