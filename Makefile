@@ -11,14 +11,14 @@
 # **************************************************************************** #
 
 COMPOSE_FILE	:= ./srcs/docker-compose.yml
-volume			:= ~/data/database ~/data/wordpress ~/data/share
+VOLUMES			:= ~/data/database ~/data/wordpress ~/data/share
 
 .PHONY: build up down restart logs ps clean re neko mount umount
 
 build: $(COMPOSE_FILE)
 	@docker compose -f $< build
 
-up: $(COMPOSE_FILE)
+up: $(COMPOSE_FILE) $(VOLUMES)
 	@docker compose -f $< up -d
 
 down: $(COMPOSE_FILE)
@@ -44,6 +44,7 @@ clean:
 	@docker volume rm $(docker volume ls -q) 2>/dev/null || true
 	@echo docker network rm...
 	@docker network rm $(docker network ls -q) 2>/dev/null || true
+	@sudo rm -rf $(VOLUMES)
 
 mount:
 	@mkdir -p ~/share
