@@ -11,7 +11,7 @@
 # **************************************************************************** #
 
 COMPOSE_FILE	:= ./srcs/docker-compose.yml
-VOLUMES			:= ~/data/database ~/data/wordpress ~/data/share
+VOLUMES			:= ~/data/
 
 .PHONY: build up down restart logs ps clean re neko mount umount
 
@@ -58,11 +58,7 @@ re: down clean build up
 neko:
 	@echo "🐈 ﾆｬｰﾝ"
 
-~/data/database:
+~/data:
 	@mkdir -p ~/data/database
-
-~/data/wordpress:
 	@mkdir -p ~/data/wordpress
-
-~/data/share:
 	@mkdir -p ~/data/share
