@@ -1,6 +1,10 @@
 #!/bin/bash
 set -e
 
+test -n "$DB_NAME"
+test -n "$DB_USER"
+test -n "$DB_PASSWORD"
+
 "$@" --skip-networking &
 MARIADB_PID=$! 
 until mysqladmin ping --silent; do

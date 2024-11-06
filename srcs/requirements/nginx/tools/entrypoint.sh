@@ -1,6 +1,8 @@
 #!/bin/bash
 set -e
 
+test -n "$DOMAIN_NAME"
+
 mkdir -p /etc/nginx/ssl
 
 openssl genpkey \

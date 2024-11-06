@@ -9,7 +9,7 @@ RUN mkdir -p /var/run/vsftpd/empty
 
 COPY ./tools/ /usr/local/bin/
 RUN chmod +x /usr/local/bin/healthcheck.sh
-RUN chmod +x /usr/local/bin/docker-entrypoint.sh
+RUN chmod +x /usr/local/bin/entrypoint.sh
 
-ENTRYPOINT ["docker-entrypoint.sh"]
+ENTRYPOINT ["entrypoint.sh"]
 CMD ["vsftpd"]

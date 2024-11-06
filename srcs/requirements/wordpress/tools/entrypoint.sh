@@ -1,6 +1,18 @@
 #!/bin/bash
 set -e
 
+test -n "$DB_NAME"
+test -n "$DB_USER"
+test -n "$DB_PASSWORD"
+test -n "$DOMAIN_NAME"
+test -n "$WP_BLOG_TITLE"
+test -n "$WP_USER1_NAME"
+test -n "$WP_USER1_EMAIL"
+test -n "$WP_USER1_PASSWORD"
+test -n "$WP_USER2_NAME"
+test -n "$WP_USER2_EMAIL"
+test -n "$WP_USER2_PASSWORD"
+
 wp_exec () {
   (
     cd "/var/www/wordpress"
