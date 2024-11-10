@@ -18,7 +18,7 @@ VOLUME_DIR		:= ~/data
 build: $(COMPOSE_FILE)
 	@docker compose -f $< build
 
-up: $(COMPOSE_FILE) $(VOLUME_DIR)
+up: $(COMPOSE_FILE) | $(VOLUME_DIR)
 	@docker compose -f $< up -d
 
 down: $(COMPOSE_FILE)
@@ -35,15 +35,15 @@ ps: $(COMPOSE_FILE)
 
 clean:
 	@echo docker stop...
-	@docker stop $(docker ps -qa) 2>/dev/null || true
+	@docker stop $(shell docker ps -qa) 2>/dev/null || true
 	@echo docker rm...
-	@docker rm $(docker ps -qa) 2>/dev/null || true
+	@docker rm $(shell docker ps -qa) 2>/dev/null || true
 	@echo docker rmi...
-	@docker rmi -f $(docker images -qa) 2>/dev/null || true
+	@docker rmi -f $(shell docker images -qa) 2>/dev/null || true
 	@echo docker volume rm...
-	@docker volume rm $(docker volume ls -q) 2>/dev/null || true
+	@docker volume rm $(shell docker volume ls -q) 2>/dev/null || true
 	@echo docker network rm...
-	@docker network rm $(docker network ls -q) 2>/dev/null || true
+	@docker network rm $(shell docker network ls -q) 2>/dev/null || true
 	@sudo rm -rf $(VOLUME_DIR)
 
 mount:
